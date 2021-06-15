@@ -42,6 +42,7 @@ group :development do
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem "annotate", "~> 3.1"
 end
 
 group :test do
@@ -56,3 +57,10 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "hotwire-rails", "~> 0.1.3"
+
+gem "simple_form", "~> 5.1"
+
+gem "bcrypt", "~> 3.1"
+
+
+gem "kaminari", "~> 1.2"

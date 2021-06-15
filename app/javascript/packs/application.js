@@ -8,9 +8,8 @@ import "@hotwired/turbo-rails"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
-import 'scss/site'
-
-import 'js/site'
+import 'scss/application'
+import 'js/application'
 
 Rails.start()
 ActiveStorage.start()

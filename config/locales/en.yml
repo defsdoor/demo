@@ -30,4 +30,10 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  must_be_signed_in: 'You must log in to proceed'
   hello: "Hello world"
+  session:
+    new:
+      login: 'Log In'
+    create:
+      invalid_login: 'Login invalid'

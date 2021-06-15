@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html <%= style_attribute(@html_styles) %>>
   <head>
     <title>Pigw</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,7 +10,8 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body <%= style_attribute(@body_styles) %>>
+    <%= render 'common/bootstrap_helper' if Rails.env.development? %>
     <%= yield %>
   </body>
 </html>
