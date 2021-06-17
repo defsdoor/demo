@@ -1,6 +1,10 @@
 
 $body-bg: white;
 
+html, body {
+  height: 100%;
+}
+
 @import "~bootstrap/scss/bootstrap.scss";
 
 @import "scss/bootstrap_helper";
@@ -8,3 +12,14 @@ $body-bg: white;
 @import "scss/mixins";
 @import "scss/menu";
 @import "scss/product";
+@import "scss/infinite_scroll";
+
+.simple-keyboard {
+  position: absolute;
+  bottom: 0px;
+  display: none;
+}
+
+.show-keyboard {
+  display: block;
+}

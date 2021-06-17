@@ -2,6 +2,12 @@ class ProductsController < ApplicationController
   before_action :get_products, only: :index
 
   def index
+      respond_to do |format|
+        format.html
+        format.json {
+          render json: { entries: render_to_string(partial: 'product', collection: @products, formats: [:html]), nextPage: @products.next_page }
+        }
+      end
   end
 
   private

@@ -1,11 +1,15 @@
-<div class="menu scroll-v">
+<div class="menu scroll-v" data-controller="menu">
   <% { 'Take Item' => nil, 'Return Item' => nil, 'Place Asset' => nil, 'Product Search' => products_path, 'Settings' => nil}.each do |menu, link| %>
-    <div class="menu_button d-flex align-items-center justify-content-center" style="background-color: <%= cycle(['#FFE0BE', '#FFF1CC', '#C5EABD', '#D2CFE9', '#F5D8F2']) %>;">
+    <div class="menu_button d-flex <%= link ? "active" : ""  %> align-items-center text-center justify-content-center" 
+         style="background-color: <%= cycle(['#FFE0BE', '#FFF1CC', '#C5EABD', '#D2CFE9', '#F5D8F2']) %>;"
+         data-action="click->menu#visit"
+         <%= "data-url=\"#{link}\"".html_safe if link %>
+         >
       <%= menu %>
     </div>
   <% end %>
   <% (0..50).each do |i| %>
-    <div class="menu_button d-flex align-items-center justify-content-center" style="background-color: #ddd;">
+    <div class="menu_button d-flex align-items-center text-center justify-content-center" style="background-color: #ddd;">
     </div>
   <% end %>
 </div>

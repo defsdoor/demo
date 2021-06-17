@@ -14,4 +14,11 @@ import 'js/application'
 Rails.start()
 ActiveStorage.start()
 
+global.Rails = Rails
+
 import "controllers"
+
+import Keyboard from 'simple-keyboard'
+import 'simple-keyboard/build/css/index.css';
+
+global.Keyboard = Keyboard

@@ -12,6 +12,11 @@
 
   <body <%= style_attribute(@body_styles) %>>
     <%= render 'common/bootstrap_helper' if Rails.env.development? %>
-    <%= yield %>
+    <div class="page-wrapper h-100 w-100 d-flex flex-column">
+      <%= yield %>
+    </div>
+    <div id="simple-keyboard" class="simple-keyboard"></div>
   </body>
 </html>
+<script>
+</script>

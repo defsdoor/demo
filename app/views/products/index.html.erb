@@ -1,1 +1,31 @@
-<%= render partial: 'product', collection: @products %>
+<div data-controller="keyboard search" class="header">
+  <div class="flex-sm-fill px-1 form-group">
+    <label class="visually-hidden" for="search"><%= t(:search_record) %></label>
+    <div class="input-group input-group-lg">
+      <%= text_field_tag :search, params[:search],
+        label: false,
+        class: 'form-control',
+        placeholder: t(:search_record),
+        id: 'productSearch',
+        autocomplete: 'off',
+        data: { 
+          search_for: "productList",
+          action: "focusin->keyboard#show click@window->keyboard#hide change->search#search keyup->search#search", 
+          keyboard_target: "input" }
+      %>
+      <button class="btn btn-outline-secondary reset-input" data-target="#subgroupsSearch" data-action="click->keyboard#reset">X</button>
+    </div>
+  </div>
+</div>
+
+<div id="productList" class="infinite-scroll-wrapper" data-controller="infinite-scroll">
+  <div class="infinite-scroll-content"  data-infinite-scroll-target="entries">
+    <%= render @products %>
+  </div>
+  <div class="next-page-container" 
+       data-infinite-scroll-target="nextpage" 
+       data-next-page="<%= @products.next_page %>"
+       data-url="<%= products_path %>">
+       &nbsp;
+  </div>
+</div>
