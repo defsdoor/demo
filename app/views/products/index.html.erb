@@ -1,8 +1,8 @@
-<div id="productList" class="d-flex flex-column flex-grow-1 h-100" data-controller="infinite-scroll">
-  <div data-controller="keyboard search" class="header p-2">
+<div id="productList" class="d-flex flex-column flex-grow-1 h-100" data-controller="infinite-scroll search">
+  <div class="header p-2">
     <div class="flex-sm-fill px-1 form-group">
       <label class="visually-hidden" for="search"><%= t(:search_record) %></label>
-      <div class="input-group input-group-lg">
+      <div class="input-group input-group-lg" data-controller="keyboard">
         <%= text_field_tag :search, params[:search],
           label: false,
           class: 'form-control',
@@ -10,7 +10,7 @@
           id: 'productSearch',
           autocomplete: 'off',
           data: { 
-            search_for: "productList",
+            infinite_scroll_target: "search",
             action: "focusin->keyboard#show click@window->keyboard#hide change->search#search keyup->search#search", 
             keyboard_target: "input" }
         %>
@@ -20,7 +20,7 @@
   </div>
 
   <div class="infinite-scroll-wrapper">
-    <div class="infinite-scroll-content"  data-infinite-scroll-target="entries">
+    <div class="infinite-scroll-content"  data-infinite-scroll-target="entries" data-search-target="entries">
       <%= render @products %>
     </div>
     <div class="next-page-container" 

@@ -1,7 +1,7 @@
 import { Controller } from "stimulus"
   
 export default class extends Controller {
-  static targets = ["entries", "nextpage", "recordCount"]
+  static targets = ["entries", "search", "nextpage", "recordCount"]
 
   initialize() { 
     let options = {
@@ -33,7 +33,7 @@ export default class extends Controller {
       dataType: 'json',
       data: jQuery.param( {
         page: next_page,
-        search: document.getElementById('productSearch').value
+        search: this.searchTarget.value
       }),
       success: (data) => {
         if (replace) this.entriesTarget.innerHTML = data.entries

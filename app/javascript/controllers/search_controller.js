@@ -1,18 +1,10 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
+  static targets = ["entries"]
 
   search(event) {
-    let thingy = event.target.dataset.searchFor;
-    if (thingy) {
-      let el = document.getElementById(thingy);
-      if (el) {
-        let controller = this.application.getControllerForElementAndIdentifier(el, 'infinite-scroll');
-        controller.load(true);
-      }
-    }
-
+      let controller = this.application.getControllerForElementAndIdentifier(this.element, 'infinite-scroll');
+      controller.load(true);
   }
-
-
 }
