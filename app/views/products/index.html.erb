@@ -1,31 +1,39 @@
-<div data-controller="keyboard search" class="header">
-  <div class="flex-sm-fill px-1 form-group">
-    <label class="visually-hidden" for="search"><%= t(:search_record) %></label>
-    <div class="input-group input-group-lg">
-      <%= text_field_tag :search, params[:search],
-        label: false,
-        class: 'form-control',
-        placeholder: t(:search_record),
-        id: 'productSearch',
-        autocomplete: 'off',
-        data: { 
-          search_for: "productList",
-          action: "focusin->keyboard#show click@window->keyboard#hide change->search#search keyup->search#search", 
-          keyboard_target: "input" }
-      %>
-      <button class="btn btn-outline-secondary reset-input" data-target="#subgroupsSearch" data-action="click->keyboard#reset">X</button>
+<div id="productList" class="d-flex flex-column flex-grow-1 h-100" data-controller="infinite-scroll">
+  <div data-controller="keyboard search" class="header p-2">
+    <div class="flex-sm-fill px-1 form-group">
+      <label class="visually-hidden" for="search"><%= t(:search_record) %></label>
+      <div class="input-group input-group-lg">
+        <%= text_field_tag :search, params[:search],
+          label: false,
+          class: 'form-control',
+          placeholder: t(:search_record),
+          id: 'productSearch',
+          autocomplete: 'off',
+          data: { 
+            search_for: "productList",
+            action: "focusin->keyboard#show click@window->keyboard#hide change->search#search keyup->search#search", 
+            keyboard_target: "input" }
+        %>
+        <button class="btn btn-outline-secondary reset-input" data-target="#subgroupsSearch" data-action="click->keyboard#reset">X</button>
+      </div>
     </div>
   </div>
-</div>
 
-<div id="productList" class="infinite-scroll-wrapper" data-controller="infinite-scroll">
-  <div class="infinite-scroll-content"  data-infinite-scroll-target="entries">
-    <%= render @products %>
+  <div class="infinite-scroll-wrapper">
+    <div class="infinite-scroll-content"  data-infinite-scroll-target="entries">
+      <%= render @products %>
+    </div>
+    <div class="next-page-container" 
+         data-infinite-scroll-target="nextpage" 
+         data-next-page="<%= @products.next_page %>"
+         data-url="<%= products_path %>">
+         &nbsp;
+    </div>
   </div>
-  <div class="next-page-container" 
-       data-infinite-scroll-target="nextpage" 
-       data-next-page="<%= @products.next_page %>"
-       data-url="<%= products_path %>">
-       &nbsp;
+  <div class="infinite-scroll-footer d-flex justify-content-between p-2">
+    <div class=""></div>
+    <div data-infinite-scroll-target="recordCount" class="record-count px-2">
+      <%= render partial: "common/record_count", object: @products %>
+    </div>
   </div>
 </div>

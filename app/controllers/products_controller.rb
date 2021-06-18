@@ -5,7 +5,10 @@ class ProductsController < ApplicationController
       respond_to do |format|
         format.html
         format.json {
-          render json: { entries: render_to_string(partial: 'product', collection: @products, formats: [:html]), nextPage: @products.next_page }
+          render json: { 
+            entries: render_to_string(partial: 'product', collection: @products, formats: [:html]),
+            nextPage: @products.next_page, 
+            recordCount: render_to_string( partial: "common/record_count", object: @products, formats: [:html] ) }
         }
       end
   end

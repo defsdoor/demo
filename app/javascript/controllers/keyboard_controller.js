@@ -10,7 +10,6 @@ export default class extends Controller {
     keyboard = new Keyboard({
       onChange: input => this.onChange(input)
     });
-
   }
 
   hide(event) {
@@ -28,7 +27,9 @@ export default class extends Controller {
     this.sendChange()
   }
 
-  show() {
+  show(event) {
+    this.typeInTo=event.target
+    keyboard.setInput(this.typeInTo.value);
     keyboard.setOptions({
       theme: `${defaultTheme} show-keyboard`
     });
@@ -41,7 +42,7 @@ export default class extends Controller {
   }
 
   onChange(input) {
-    this.inputTarget.value = input;
+    this.typeInTo.value = input;
     this.sendChange()
   }
 

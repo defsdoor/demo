@@ -7,12 +7,12 @@
         <div class="card-header">
           <%= t '.login' %>
         </div>
-        <div class="card-body">
+        <div data-controller="keyboard" class="card-body">
           <% if flash[:alert] %>
             <div class="alert alert-danger"><%= flash[:alert] %></div>
           <% end %>
-          <%= f.input :username %>
-          <%= f.input :password %>
+          <%= f.input :username, input_html: { autocomplete: "new-password", data: { keyboard_target: "input", action: "focusin->keyboard#show click@window->keyboard#hide" } }  %>
+          <%= f.input :password, input_html: { autocomplete: "new-password", data: { keyboard_target: "input", action: "focusin->keyboard#show click@window->keyboard#hide" } } %>
         </div>
         <div class="card-footer text-end">
           <%= f.button :submit, t('.login'), class: 'btn-primary btn-xl-block' %>

@@ -30,6 +30,9 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  records:
+    one: Record
+    other: Records
   search_record: Search
   must_be_signed_in: 'You must log in to proceed'
   hello: "Hello world"
