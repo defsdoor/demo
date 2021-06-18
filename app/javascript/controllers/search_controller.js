@@ -8,7 +8,7 @@ export default class extends Controller {
       let el = document.getElementById(thingy);
       if (el) {
         let controller = this.application.getControllerForElementAndIdentifier(el, 'infinite-scroll');
-        controller.loadNew();
+        controller.load(true);
       }
     }
 

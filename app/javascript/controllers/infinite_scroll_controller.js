@@ -17,30 +17,14 @@ export default class extends Controller {
 
   processIntersectionEntries(entries) {
     entries.forEach(entry => {
-      if (entry.isIntersecting) this.loadMore();
+      if (entry.isIntersecting) this.load();
     })
   }
 
-  loadNew() {
-    let url = this.nextpageTarget.dataset.url;
-    Rails.ajax({
-      type: 'GET',
-      url: url,
-      dataType: 'json',
-      data: jQuery.param( {
-        search: document.getElementById('productSearch').value
-      }),
-      success: (data) => {
-        this.entriesTarget.innerHTML = data.entries
-        this.nextpageTarget.dataset.nextPage = data.nextPage
-        this.recordCountTarget.innerHTML = data.recordCount
-      }
-    })
-  }
+  load(replace = false) {
+    let next_page
+    if ( (next_page = (replace ? 0 : this.nextpageTarget.dataset.nextPage)) == "null") return;
 
-  loadMore() {
-    let next_page = this.nextpageTarget.dataset.nextPage;
-    if (next_page == "null") { return }
     let url = this.nextpageTarget.dataset.url;
 
     Rails.ajax({
@@ -52,7 +36,8 @@ export default class extends Controller {
         search: document.getElementById('productSearch').value
       }),
       success: (data) => {
-        this.entriesTarget.insertAdjacentHTML('beforeend', data.entries)
+        if (replace) this.entriesTarget.innerHTML = data.entries
+        else this.entriesTarget.insertAdjacentHTML('beforeend', data.entries)
         this.nextpageTarget.dataset.nextPage = data.nextPage
         this.recordCountTarget.innerHTML = data.recordCount
       }
