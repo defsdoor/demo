@@ -1,5 +1,7 @@
 #!/bin/bash
 
+WEBADDRESS=http://localhost
+
 xset -dpms
 xset s off
 openbox-session &
@@ -14,6 +16,12 @@ else
 	BROWSER=chromium-browser
 fi
 
+# Dont start browser until web server responding
+while ! wget -O /dev/null $WEBADDRESS >/dev/null 2>&1
+do
+	sleep 3
+done
 
-$BROWSER --kiosk --incognito --disable-pinch --no-touch-pinch --overscroll-history-navigation=2 --no-first-run --no-default-browser-check http://localhost
+
+$BROWSER --kiosk --incognito --disable-pinch --no-touch-pinch --overscroll-history-navigation=2 --no-first-run --no-default-browser-check $WEBADDRESS
 
