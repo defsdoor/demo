@@ -1,10 +1,11 @@
 import { Controller } from "stimulus"
   
 export default class extends Controller {
-  static targets = ["entries", "search", "nextpage", "recordCount"]
+  static targets = ["entries", "scroller", "search", "nextpage", "recordCount"]
 
   initialize() { 
     let options = {
+      root: this.scrollerTarget,
       rootMargin: '200px',
     }     
 
@@ -36,7 +37,10 @@ export default class extends Controller {
         search: this.searchTarget.value
       }),
       success: (data) => {
-        if (replace) this.entriesTarget.innerHTML = data.entries
+        if (replace) {
+          this.entriesTarget.innerHTML = data.entries
+          this.scrollerTarget.scrollTop = 0
+        }
         else this.entriesTarget.insertAdjacentHTML('beforeend', data.entries)
         this.nextpageTarget.dataset.nextPage = data.nextPage
         this.recordCountTarget.innerHTML = data.recordCount
