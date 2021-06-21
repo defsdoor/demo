@@ -6,5 +6,5 @@ eval "$(rbenv init - bash)"
 export WORKING_DIR=`pwd`
 cd $WORKING_DIR
 
-exec bundle exec puma -C config/puma.rb
+exec bundle exec puma -C config/puma-${RAILS_ENV:-production}.rb
 
