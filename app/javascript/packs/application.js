@@ -19,6 +19,7 @@ global.Rails = Rails
 import "controllers"
 
 import Keyboard from 'simple-keyboard'
-import 'simple-keyboard/build/css/index.css';
+
+import 'simple-keyboard/build/css/index.css'
 
 global.Keyboard = Keyboard
