@@ -1,4 +1,6 @@
-<div id="productList" class="d-flex flex-column flex-grow-1 h-100" data-controller="infinite-scroll search">
+<div id="productList" class="d-flex flex-column flex-grow-1 h-100" 
+                      data-controller="infinite-scroll search"
+                      data-search-refresh-interval-value="300">
   <div class="header p-2">
     <div class="flex-sm-fill px-1 form-group">
       <label class="visually-hidden" for="search"><%= t(:search_record) %></label>
@@ -11,7 +13,8 @@
           autocomplete: 'off',
           data: { 
             infinite_scroll_target: "search",
-            action: "focusin->keyboard#show click@window->keyboard#hide change->search#search keyup->search#search", 
+            search_target: "input",
+            action: "focusin->keyboard#show click@window->keyboard#hide", 
             keyboard_target: "input" }
         %>
         <button class="btn btn-outline-secondary reset-input" data-action="click->keyboard#reset">X</button>

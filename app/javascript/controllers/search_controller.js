@@ -1,10 +1,35 @@
-import { Controller } from "stimulus"
+import { Controller } from "stimulus" 
 
 export default class extends Controller {
-  static targets = ["entries"]
+  static values = { refreshInterval: Number }
+  static targets = ["entries", "input"]
 
-  search(event) {
-      let controller = this.application.getControllerForElementAndIdentifier(this.element, 'infinite-scroll');
-      controller.load(true);
+  connect() {
+    this.scrollController = this.application.getControllerForElementAndIdentifier(this.element, 'infinite-scroll');
+    if (this.hasRefreshIntervalValue) {
+      this.startObserving();
+    }
   }
+
+  disconnect() {
+    this.stopObserving()
+  }
+
+  startObserving() {
+    var previousValue=""
+    this.observeTimer = setInterval(() => {
+      var currentValue = this.inputTarget.value
+      if (currentValue != previousValue) {
+        this.scrollController.load(true);
+
+      }
+    }, this.refreshIntervalValue)
+  }
+
+  stopObserving() {
+    if (this.observeTimer) {
+      clearInterval(this.observeTimer)
+    }
+  }
+
 }
