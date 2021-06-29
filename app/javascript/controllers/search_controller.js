@@ -21,7 +21,7 @@ export default class extends Controller {
       var currentValue = this.inputTarget.value
       if (currentValue != previousValue) {
         this.scrollController.load(true);
-
+        previousValue = currentValue
       }
     }, this.refreshIntervalValue)
   }
